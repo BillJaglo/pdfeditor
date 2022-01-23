@@ -80,9 +80,13 @@ def write_to_pdf(file_path, coding_text_1, *args):
     file_name = Path(local_pdf_filename).stem
     packet = io.BytesIO()
     can = canvas.Canvas(packet, pagesize=letter)
-    can.drawString(10, 140, coding_text_1)
-    can.drawString(10, 127, *args)
-    can.save()
+    try:
+        can.drawString(10, 140, coding_text_1)
+        can.drawString(10, 127, *args)
+        can.save()
+    except:
+        can.drawString(10, 140, coding_text_1)
+        can.save()
 
     # move to the beginning of the StringIO buffer
     packet.seek(0)
