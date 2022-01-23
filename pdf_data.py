@@ -5,11 +5,12 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 import re
+import user_inputs
 
 
 def get_usd_value(file):
     # location of files
-    local_pdf_filename = f"files/{file}"
+    local_pdf_filename = f"{user_inputs.input_file_path}{file}"
     # this works for one page pdfs
     pages = [0]  # just the first page
 
@@ -54,7 +55,7 @@ def get_usd_value(file):
 
 def get_customer_name(file):
     # location of files
-    local_pdf_filename = f"files/{file}"
+    local_pdf_filename = f"{user_inputs.input_file_path}{file}"
     # this works for one page pdfs
     pages = [0]  # just the first page
 
@@ -68,14 +69,14 @@ def get_customer_name(file):
 
 def get_invoice_number(file):
     # location of files
-    local_pdf_filename = f"files/{file}"
+    local_pdf_filename = f"{user_inputs.input_file_path}{file}"
     file_name = Path(local_pdf_filename).stem
     invoice_number = file_name.split(" ")[0]
     return invoice_number
 
 
 def write_to_pdf(file_path, coding_text_1, *args):
-    local_pdf_filename = f"files/{file_path}"
+    local_pdf_filename = f"{user_inputs.input_file_path}{file_path}"
     file_name = Path(local_pdf_filename).stem
     packet = io.BytesIO()
     can = canvas.Canvas(packet, pagesize=letter)
@@ -96,6 +97,6 @@ def write_to_pdf(file_path, coding_text_1, *args):
     page.mergePage(new_pdf.getPage(0))
     output.addPage(page)
     # finally, write "output" to a real file
-    outputStream = open(f"output_files/{file_name}.pdf", "wb")
+    outputStream = open(f"{user_inputs.output_file_path}{file_name}.pdf", "wb")
     output.write(outputStream)
     outputStream.close()

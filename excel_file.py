@@ -12,4 +12,4 @@ def create_csv(invoice_num, client_name, invoice_amount, output_path):
     # creates a dataframe using the nested list from above
     df = pd.DataFrame(invoice_info_list_full)
     # saves the database as a csv file
-    df.to_csv(f"{output_path}/invoice_list.csv", index=False)
+    df.to_csv(f"{output_path}invoice_list.csv", index=False)
