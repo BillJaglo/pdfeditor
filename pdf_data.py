@@ -59,11 +59,17 @@ def get_customer_name(file):
     # this works for one page pdfs
     pages = [0]  # just the first page
 
-    # this takes all the text on the pdf and stores it in a string variable
-    extracted_text = high_level.extract_text(local_pdf_filename, "", pages)
+    file_name = Path(local_pdf_filename).stem
+    customer_name = file_name.split(' ', 1)[1]
 
-    # finds all text  that is enclosed by a (), then returns the second case and strips the () out, saves as variable
-    customer_name = re.findall(r'\(.*?\)', extracted_text)[1].strip('()')
+
+    ### --- Saving this code, finds the text within a parentheses and returns the second case of it. --- ###
+    # # this takes all the text on the pdf and stores it in a string variable
+    # extracted_text = high_level.extract_text(local_pdf_filename, "", pages)
+    # # finds all text  that is enclosed by a (), then returns the second case and strips the () out, saves as variable
+    # customer_name = re.findall(r'\(.*?\)', extracted_text)[1].strip('()')
+
+
     return customer_name
 
 
